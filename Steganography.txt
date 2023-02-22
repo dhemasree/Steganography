@@ -1,0 +1,46 @@
+Steganography
+
+Steganography is the technique of hiding secret data within an ordinary, non-secret, file or message in order to avoid detection; 
+the secret data is then extracted at its destination.
+Every image has three layers of color RGB
+if we change least significant bits of these layers individually wont effect the human eye
+To accomodate 8 bits - Red(3 bits),Green(3 bits),Blue(2 bits)
+
+Libraries
+OS->OS module provides the facility to establish the interaction between the user and the operating system.
+CV2->In OpenCV, the CV is an abbreviation form of a computer vision, which is defined as a field of study 
+that helps computers to understand the content of the digital images such as photographs and videos.
+
+A image and a doc is taken as input
+Image-image path is filtered to get the name , _e is addded for the new image file 
+Doc- Header(20 bytes name + 10 bytes size) if less than given size padding using *,if more trimmed
+
+two features-embed,extract
+
+In both cases image path and doc path checked to ensure they both exist
+
+Embed
+
+Image is loaded in memory and read using imread for conversion into 3 channel BGR color image
+capacity of image is calculated using h,w
+if cannot accomodate header,message printed
+
+Header is included then the doc file is opened to read
+loop goes on till the capacity
+
+data is retrived,byte object converted to int,bytes converted/split into bits
+2 bits in blue
+3 in green
+3 in red
+
+stored in the new image generated earlier
+
+Extracted
+
+Embedded inmage is loaded into memory and read using imread_color
+size is fetched(h,w)
+loop of h,w for eaxh row and each column pixel
+pixel is taken and divided into b,g,r
+3 bits from red , 3 from green, 2 from bue extracted
+merged and added to data
+header is written in the doc
